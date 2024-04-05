@@ -4,7 +4,7 @@ from tile import TILE_SIZE, Tile
 from direction import Direction
 from maze import Maze
 
-WAIT_TIME_MS = 100
+WAIT_TIME_MS = 0
 
 # maybe maze should be a global, idk
 # cuz there's only ever one of it during a simulation
@@ -51,7 +51,6 @@ class MazePlayer:
 
     def _update_maze(self):
         draw_maze(self.maze)
-        # TODO: fix inaccurate player starting position
         # draw player
         x = self.col * TILE_SIZE
         y = self.row * TILE_SIZE

@@ -10,11 +10,12 @@ MAZE_FILEPATH = "mazes/m1.txt"
 CROSSOVER_RATE = 0.8
 MUTATION_RATE = 0.001
 POPULATION_SIZE = 10
-CHROMOSOME_LENGTH = 60
+CHROMOSOME_LENGTH = 100
 
 
 def file_to_array(file):
     maze_array = []
+    # TODO: read start/end row/col from file instead of hard-coding it
     with open(file, "r") as f:
         for line in f.readlines():
             maze_array.append([int(c) for c in line.rstrip()])
@@ -24,7 +25,7 @@ def file_to_array(file):
 def main():
     # populate grid w/ correct layout from maze file
     maze_array = file_to_array(MAZE_FILEPATH)
-    maze = Maze(maze_array, 1, 14, 1, 0)
+    maze = Maze(maze_array, 7, 14, 2, 0)
 
     ga = GeneticAlg(CROSSOVER_RATE, MUTATION_RATE, POPULATION_SIZE, CHROMOSOME_LENGTH, maze)
 
@@ -37,7 +38,7 @@ def main():
                 sys.exit()
         ga.epoch()
         pygame.display.update()
-        if ga.fittest_genome.fitness >= 0.5:
+        if ga.fittest_genome.fitness == 1:
             g = ga.fittest_genome
             print('\nSOLUTION FOUND')
             print('Chromosome: {0}\nFitness: {1}'.format(g.chromosome, g.fitness))
